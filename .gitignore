@@ -32,7 +32,8 @@
 *.app
 
 *.opendb
-*VC*
+*.vcxproj
+*.vcxproj.*
 *.sln
 *.sdf
 

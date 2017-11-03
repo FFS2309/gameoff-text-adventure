@@ -9,6 +9,8 @@
 #if defined(_WIN32) || defined(_WIN64)
 #include <Windows.h>
 #endif
+#include <vector>
+#include <algorithm>
 #include <stdio.h>
 #include <iostream>
 #include <tchar.h>

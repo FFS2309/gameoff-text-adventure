@@ -11,6 +11,7 @@ public:
 	std::string getDescription();
 	std::string eventTriggered(GameEvent &gameEvent);
 	GameObject** getObjects();
+private:
 	std::string name;
 	std::string description;
 };
