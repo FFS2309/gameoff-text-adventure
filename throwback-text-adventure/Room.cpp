@@ -64,6 +64,66 @@ std::string Room::getDescription()
 	return this->description;
 }
 
+Room & Room::getNorthExit()
+{
+	return *north;
+}
+
+Room & Room::getSouthExit()
+{
+	return *south;
+}
+
+Room & Room::getEastExit()
+{
+	return *east;
+}
+
+Room & Room::getWestExit()
+{
+	return *west;
+}
+
+bool Room::hasNorthExit()
+{
+	return (north != nullptr);
+}
+
+bool Room::hasSouthExit()
+{
+	return (south != nullptr);
+}
+
+bool Room::hasEastExit()
+{
+	return (east != nullptr);
+}
+
+bool Room::hasWestExit()
+{
+	return (west != nullptr);
+}
+
+void Room::setNorthExit(Room * exit)
+{
+	this->north = exit;
+}
+
+void Room::setSouthExit(Room * exit)
+{
+	this->south = exit;
+}
+
+void Room::setEastExit(Room * exit)
+{
+	this->east = exit;
+}
+
+void Room::setWestExit(Room * exit)
+{
+	this->west = exit;
+}
+
 std::string Room::eventTriggered(GameEvent & gameEvent)
 {
 	string seeString = "";

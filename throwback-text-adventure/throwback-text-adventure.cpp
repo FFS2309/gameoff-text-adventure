@@ -11,6 +11,33 @@ void sleep(int seconds) {
 #endif
 }
 
+// 0=NS;1=EW;2=SN;3=WE
+void linkRooms(Room* roomA, Room* roomB, short direction, bool oneway = false) {
+	switch (direction) {
+	default:
+	case 0:
+		roomA->setNorthExit(roomB);
+		if(!oneway)
+			roomB->setSouthExit(roomA);
+		break;
+	case 1:
+		roomA->setEastExit(roomB);
+		if (!oneway)
+			roomB->setWestExit(roomA);
+		break;
+	case 2:
+		roomA->setSouthExit(roomB);
+		if (!oneway)
+			roomB->setNorthExit(roomA);
+		break;
+	case 3:
+		roomA->setWestExit(roomB);
+		if (!oneway)
+			roomB->setEastExit(roomA);
+		break;
+	}
+}
+
 vector<string> split(const string& str, const string& delim)
 {
 	vector<string> tokens;
@@ -60,8 +87,10 @@ int main()
 	system("cls");
 #endif
 	int random = 0;
-	Room r("Main hall", "It is a really big room with white walls and large windows!");
-	Player p(name, description, &r);
+	Room mainHall("Main hall", "It is a really big room with white walls and large windows!");
+	Room secondRoom("Second Room", "A really tiny closet. There are cobwebs everywhere ... Ew a spider!");
+	linkRooms(&mainHall, &secondRoom, 0);
+	Player p(name, description, &secondRoom);
 	char command[64];
 	while (true) {
 		cout << "What do you want to do ?" << endl;
@@ -148,7 +177,46 @@ int main()
 			}
 		}
 		else if (strstr(command, "up") != nullptr || strstr(command, "north") != nullptr) {
-
+			if (p.getRoom().hasNorthExit()) {
+				Room north = p.getRoom().getNorthExit();
+				cout << "You go north to " + north.getName() << endl;
+				GameEvent lookEvent(&p, GameEvent::ACTION::LOOK_AT);
+				cout << north.eventTriggered(lookEvent) << endl;
+				p.setRoom(&north);
+			}
+			else {
+				cout << "You cannot go there!" << endl;
+			}
+		}
+		else if (strstr(command, "down") != nullptr || strstr(command, "south") != nullptr) {
+			if (p.getRoom().hasSouthExit()) {
+				Room south = p.getRoom().getSouthExit();
+				cout << "You go south to " + south.getName() << endl;
+				p.setRoom(&south);
+			}
+			else {
+				cout << "You cannot go there!" << endl;
+			}
+		}
+		else if (strstr(command, "right") != nullptr || strstr(command, "east") != nullptr) {
+			if (p.getRoom().hasEastExit()) {
+				Room east = p.getRoom().getEastExit();
+				cout << "You go east to " + east.getName() << endl;
+				p.setRoom(&east);
+			}
+			else {
+				cout << "You cannot go there!" << endl;
+			}
+		}
+		else if (strstr(command, "left") != nullptr || strstr(command, "west") != nullptr) {
+			if (p.getRoom().hasWestExit()) {
+				Room west = p.getRoom().getWestExit();
+				cout << "You go west to " + west.getName() << endl;
+				p.setRoom(&west);
+			}
+			else {
+				cout << "You cannot go there!" << endl;
+			}
 		}
 	}
     return 1337;
