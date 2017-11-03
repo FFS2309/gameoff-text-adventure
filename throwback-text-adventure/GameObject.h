@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "GameEvent.h"
+class GameEvent;
 class GameObject
 {
 public:

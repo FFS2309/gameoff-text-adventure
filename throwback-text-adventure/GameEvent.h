@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+class GameObject;
 class GameEvent {
 public:
 	enum class ACTION
@@ -8,14 +9,14 @@ public:
 		LOOK_AT,
 		PICK_UP,
 	};
-	GameEvent(GameObject &who, ACTION what);
-	GameObject& getCause() {
+	GameEvent(GameObject *who, ACTION what);
+	GameObject* getCause() {
 		return who;
 	}
 	ACTION getAction() {
 		return what;
 	}
 private:
-	GameObject &who;
+	GameObject *who;
 	ACTION what;
 };

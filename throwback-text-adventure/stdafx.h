@@ -6,7 +6,9 @@
 #pragma once
 
 #include "targetver.h"
-
+#if defined(_WIN32) || defined(_WIN64)
+#include <Windows.h>
+#endif
 #include <stdio.h>
 #include <iostream>
 #include <tchar.h>

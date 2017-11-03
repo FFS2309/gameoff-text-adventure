@@ -2,9 +2,10 @@
 #include "Player.h"
 
 using namespace std;
-Player::Player(string name, string description):
+Player::Player(string name, string description, Room &romm) :
 	name(name),
-	description(description)
+	description(description),
+	room(room)
 {
 
 }
@@ -39,4 +40,18 @@ std::string Player::eventTriggered(GameEvent & gameEvent)
 	case GameEvent::ACTION::PICK_UP:
 		return "You can't pick me up! I'm the player !!!";
 	}
+}
+
+Room Player::getRoom()
+{
+	return room;
+}
+
+void Player::setRoom(Room room)
+{
+	this->room = room;
+}
+
+void Player::pickUp(GameObject & gameObject)
+{
 }
