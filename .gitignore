@@ -36,3 +36,5 @@
 *.sdf
 
 Debug/
+ipch/
+Release/
