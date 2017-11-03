@@ -31,10 +31,12 @@
 *.out
 *.app
 
-.vs/
+*.opendb
+*VC*
 *.sln
 *.sdf
 
+.vs/
 Debug/
 ipch/
 Release/
