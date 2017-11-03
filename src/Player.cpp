@@ -3,8 +3,7 @@
 
 using namespace std;
 Player::Player(string name, string description, Room* room) :
-	name(name),
-	description(description),
+	GameObject(name, description),
 	room(room)
 {
 

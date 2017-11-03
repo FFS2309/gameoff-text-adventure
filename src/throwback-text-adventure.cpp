@@ -90,7 +90,7 @@ int main()
 	Room mainHall("Main hall", "It is a really big room with white walls and large windows!");
 	Room secondRoom("Second Room", "A really tiny closet. There are cobwebs everywhere ... Ew a spider!");
 	linkRooms(&mainHall, &secondRoom, 0);
-	Player p(name, description, &secondRoom);
+	Player p(name, description, &mainHall);
 	char command[64];
 	while (true) {
 		cout << "What do you want to do ?" << endl;

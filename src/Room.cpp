@@ -6,14 +6,13 @@ using namespace std;
 GameObject *objects[10];
 int objectCount = sizeof(objects) / sizeof(GameObject*);
 class Table : public GameObject {
-	void interact(GameObject &gameObject) {
+public:
+    Table() : GameObject("Table", "Just a sturdy, old, wooden table!")
+    {
+        
+    }
+	void interact(GameObject &gameObject) override {
 
-	}
-	std::string Table::getName() {
-		return "Table";
-	}
-	std::string Table::getDescription() {
-		return "Just a sturdy, old, wooden table!";
 	}
 	std::string Table::eventTriggered(GameEvent &gameEvent) {
 
@@ -30,7 +29,7 @@ class Table : public GameObject {
 	}
 };
 Room::Room(std::string name, std::string description)
-	: name(name), description(description)
+	: GameObject(name, description)
 {
 	//m_Name = name;
 	//m_Description = description;
@@ -52,16 +51,6 @@ Room::~Room()
 
 void Room::interact(GameObject & gameObject)
 {
-}
-
-std::string Room::getName()
-{
-	return this->name;
-}
-
-std::string Room::getDescription()
-{
-	return this->description;
 }
 
 Room & Room::getNorthExit()
