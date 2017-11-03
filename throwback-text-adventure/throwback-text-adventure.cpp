@@ -45,8 +45,8 @@ int main()
 	system("cls");
 #endif
 	int random = 0;
-	Room r = *(new Room("Main hall", "It is a really big room with white walls and large windows"));
-	Player p = *(new Player(*(new string(name, 256)), *(new string(description, 1024)), r));
+	Room r("Main hall", "It is a really big room with white walls and large windows");
+	Player p(name, description, &r);
 	char command[64];
 	while (true) {
 		cout << "What do you want to do ?" << endl;
@@ -55,7 +55,7 @@ int main()
 			return 0;
 		}
 		else if (strcmp(command, "look") == 0) {
-			GameEvent lookEvent = *(new GameEvent(&p, GameEvent::ACTION::LOOK_AT));
+			GameEvent lookEvent(&p, GameEvent::ACTION::LOOK_AT);
 			cout << p.getRoom().eventTriggered(lookEvent) << endl;
 		}
 	}

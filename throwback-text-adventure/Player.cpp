@@ -2,7 +2,7 @@
 #include "Player.h"
 
 using namespace std;
-Player::Player(string name, string description, Room &romm) :
+Player::Player(string name, string description, Room* room) :
 	name(name),
 	description(description),
 	room(room)
@@ -42,12 +42,12 @@ std::string Player::eventTriggered(GameEvent & gameEvent)
 	}
 }
 
-Room Player::getRoom()
+Room& Player::getRoom()
 {
-	return room;
+	return *room;
 }
 
-void Player::setRoom(Room room)
+void Player::setRoom(Room* room)
 {
 	this->room = room;
 }
