@@ -96,9 +96,59 @@ int main()
 					}
 				}
 				if (!found) {
-					cout << "You look around you, but the is no " << look_at << " anywhere" << endl;
+					cout << "You look around you, but there is no " << look_at << " anywhere" << endl;
 				}
 			}
+		}
+		else if (strstr(command, "pick up") != nullptr) {
+			char cArgs[64];
+			for (int i = 0; i < 64 - 8; i++) {
+				cArgs[i] = command[i + 8];
+			}
+			vector<string> args = split(cArgs, " ");
+			GameObject** roomObjects = p.getRoom().getObjects();
+			for each(string pick_up in args) {
+				boolean found = false;
+				for (int i = 0; roomObjects[i] != nullptr && roomObjects[i] != NULL; i++) {
+					string look_obj = string(roomObjects[i]->getName());
+					transform(look_obj.begin(), look_obj.end(), look_obj.begin(), ::tolower);
+					if (look_obj == pick_up) {
+						found = true;
+						GameEvent lookAtEvent(&p, GameEvent::ACTION::PICK_UP);
+						cout << roomObjects[i]->eventTriggered(lookAtEvent) << endl;
+					}
+				}
+				if (!found) {
+					cout << "You look around you, but there is no " << pick_up << " anywhere" << endl;
+				}
+			}
+		}
+		else if (strstr(command, "interact") != nullptr) {
+			char cArgs[64];
+			for (int i = 0; i < 64 - 8; i++) {
+				cArgs[i] = command[i + 8];
+			}
+			vector<string> args = split(cArgs, " ");
+			GameObject** roomObjects = p.getRoom().getObjects();
+			for each(string pick_up in args) {
+				if (pick_up == "with") continue;
+				boolean found = false;
+				for (int i = 0; roomObjects[i] != nullptr && roomObjects[i] != NULL; i++) {
+					string look_obj = string(roomObjects[i]->getName());
+					transform(look_obj.begin(), look_obj.end(), look_obj.begin(), ::tolower);
+					if (look_obj == pick_up) {
+						found = true;
+						GameEvent lookAtEvent(&p, GameEvent::ACTION::INTERACT);
+						cout << roomObjects[i]->eventTriggered(lookAtEvent) << endl;
+					}
+				}
+				if (!found) {
+					cout << "You look around you, but there is no " << pick_up << " anywhere" << endl;
+				}
+			}
+		}
+		else if (strstr(command, "up") != nullptr || strstr(command, "north") != nullptr) {
+
 		}
 	}
     return 1337;
